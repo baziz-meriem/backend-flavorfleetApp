@@ -2,11 +2,12 @@ import { DataTypes, Model } from 'sequelize';
 import { sequelize } from './sequelize';
 
 export interface UserAttributes {
-  id: number;
+  id?: number; // Mark id as optional
   address: string;
   email: string | null;
   phoneNum: string | null;
   password: string;
+  image: string | null; // Provide a default value if needed
 }
 
 export class User extends Model<UserAttributes> implements UserAttributes {
@@ -15,6 +16,7 @@ export class User extends Model<UserAttributes> implements UserAttributes {
   public email!: string | null;
   public phoneNum!: string | null;
   public password!: string;
+  public image!: string | null;
 
   // Function to check if the provided password matches the stored password
   public checkPassword(password: string): boolean {
@@ -47,6 +49,10 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    image: {
+      type: DataTypes.STRING, // Assuming the image will be stored as a string (path or URL)
+      allowNull: true,
     },
   },
   {

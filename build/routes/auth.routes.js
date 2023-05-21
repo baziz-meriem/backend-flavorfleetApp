@@ -7,3 +7,4 @@ const authController = new auth_controller_1.AuthController();
 const router = (0, express_1.Router)();
 exports.authRoutes = router;
 router.post('/login', authController.login);
+router.post('/register', authController.register); // Add the register route

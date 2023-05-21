@@ -35,6 +35,10 @@ User.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
+    image: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
 }, {
     sequelize: sequelize_2.sequelize,
     timestamps: false,

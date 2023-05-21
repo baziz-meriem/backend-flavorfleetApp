@@ -12,6 +12,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const auth_service_1 = require("../services/auth.service");
 class AuthController {
+    register(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const authService = new auth_service_1.AuthService();
+                const { address, email, image, phoneNum, password } = req.body;
+                const userDetails = { address, email, image, phoneNum, password };
+                const result = yield authService.register(userDetails);
+                res.json(result);
+            }
+            catch (error) {
+                console.error(error);
+                res.status(500).json({ message: "Failed to register user from controller." });
+            }
+        });
+    }
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

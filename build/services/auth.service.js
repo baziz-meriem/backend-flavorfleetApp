@@ -16,6 +16,31 @@ exports.AuthService = void 0;
 const User_1 = __importDefault(require("../models/User"));
 const sequelize_1 = require("sequelize");
 class AuthService {
+    register(userDetails) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // Check if the user with the provided email or phone number already exists
+                const existingUser = yield User_1.default.findOne({
+                    where: {
+                        [sequelize_1.Op.or]: [{ email: userDetails.email }, { phoneNum: userDetails.phoneNum }],
+                    },
+                });
+                if (existingUser) {
+                    // User with the same email or phone number already exists
+                    return { success: false, message: "User with the same email or phone number already exists." };
+                }
+                // Create a new user
+                const newUser = yield User_1.default.create(userDetails);
+                // Registration successful
+                return { success: true, user: newUser };
+            }
+            catch (error) {
+                // Error occurred during registration
+                console.error("Failed to register user:", error);
+                return { success: false, message: "Failed to register user." };
+            }
+        });
+    }
     login(identifier, password) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

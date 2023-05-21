@@ -4,6 +4,7 @@ var _restaurant = require("./restaurant");
 
 export default function initModels(sequelize: any) {
   var restaurant = _restaurant(sequelize, DataTypes);
+  
  
   return {
     restaurant,

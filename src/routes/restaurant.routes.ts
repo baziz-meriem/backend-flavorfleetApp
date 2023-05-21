@@ -8,5 +8,7 @@ const router = Router();
 
 router.get('/getAll', restaurantController.getAll);
 
+
+
 export { router as restaurantRoutes };
 
